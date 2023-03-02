@@ -274,84 +274,126 @@
                 <Columns>
                     <dx:CardViewTextColumn FieldName="id" ReadOnly="True" Visible="False">
                     </dx:CardViewTextColumn>
-                    <dx:CardViewTextColumn FieldName="name_environment" VisibleIndex="0" Caption=" ">
+                    <dx:CardViewTextColumn FieldName="name_environment" VisibleIndex="0">
+                        <PropertiesTextEdit Width="90%"><Style Font-Size="Small"></Style></PropertiesTextEdit>
                     </dx:CardViewTextColumn>
-                    <dx:CardViewTextColumn FieldName="url" VisibleIndex="2">
-                        <PropertiesTextEdit Width="100%">
+                    <dx:CardViewTextColumn FieldName="url" VisibleIndex="1">
+                        <PropertiesTextEdit>
                             <ValidationSettings>
-                                <RegularExpression ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?" ErrorText="La URL debe de comenzar con https." />
+                                <RegularExpression ErrorText="La URL debe de comenzar con https." ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?" />
                             </ValidationSettings>
                         </PropertiesTextEdit>
                     </dx:CardViewTextColumn>
-                    <dx:CardViewTextColumn FieldName="ip_server" VisibleIndex="3">
+                    <dx:CardViewTextColumn FieldName="ip_server" VisibleIndex="2">
                         <PropertiesTextEdit>
                             <ValidationSettings>
                                 <RegularExpression ErrorText="La IP debe de ser 255.255.255.255 u otro formato valido." ValidationExpression="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" />
                             </ValidationSettings>
                         </PropertiesTextEdit>
                     </dx:CardViewTextColumn>
-                    <dx:CardViewTextColumn FieldName="ip_database" VisibleIndex="4">
+                    <dx:CardViewTextColumn FieldName="ip_database" VisibleIndex="3">
                         <PropertiesTextEdit>
                             <ValidationSettings>
                                 <RegularExpression ErrorText="La IP debe de ser 255.255.255.255 u otro formato valido." ValidationExpression="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" />
                             </ValidationSettings>
                         </PropertiesTextEdit>
                     </dx:CardViewTextColumn>
-                    <dx:CardViewTextColumn FieldName="number_module" VisibleIndex="8">
+                    <dx:CardViewTextColumn FieldName="number_module" VisibleIndex="7">
                         <PropertiesTextEdit>
                             <ValidationSettings>
-                                <RegularExpression ErrorText="Solo se aceptan numeros" ValidationExpression="\d+" />
+                                <RegularExpression ErrorText="Solo se aceptan números" ValidationExpression="\d+" />
                             </ValidationSettings>
                         </PropertiesTextEdit>
                     </dx:CardViewTextColumn>
-                    <dx:CardViewBinaryImageColumn Caption=" " FieldName="logo" VisibleIndex="1">
-                        <PropertiesBinaryImage ImageHeight="175px" ImageWidth="200px">
+                    <dx:CardViewBinaryImageColumn FieldName="logo" VisibleIndex="8">
+                        <PropertiesBinaryImage ImageAlign="Middle" ImageHeight="100px" ImageWidth="125px">
                             <EditingSettings Enabled="True">
                             </EditingSettings>
                         </PropertiesBinaryImage>
                     </dx:CardViewBinaryImageColumn>
-                    <dx:CardViewComboBoxColumn FieldName="management_db" VisibleIndex="5">
-                        <PropertiesComboBox DataSourceID="ComboBox" TextField="value_catalogue" ValueField="id">
+                    <dx:CardViewComboBoxColumn FieldName="management_db" VisibleIndex="4">
+                        <PropertiesComboBox ShowImageInEditBox="True" DataSourceID="ComboBox" ImageUrlField="img" TextField="name_management" ValueField="name_management" Width="90%">
+                            <ItemImage Height="24px" Width="23px" />
+                            <Buttons>
+                                <dx:EditButton ImagePosition="Right">
+                                    <Image IconID="spreadsheet_adddatasource_svg_dark_16x16"></Image>
+                                </dx:EditButton>
+                            </Buttons>
                         </PropertiesComboBox>
                     </dx:CardViewComboBoxColumn>
-                    <dx:CardViewComboBoxColumn FieldName="version_db" VisibleIndex="6">
-                        <PropertiesComboBox DataSourceID="ComboBox0" TextField="value_catalogue" ValueField="id">
+                    <dx:CardViewComboBoxColumn FieldName="version_db" VisibleIndex="5">
+                        <PropertiesComboBox ShowImageInEditBox="True" DataSourceID="ComboBox0" ImageUrlField="img" TextField="name_version" ValueField="name_version" Width="90%" SelectInputTextOnClick="True">
+                            <ItemImage Height="24px" Width="23px" />
+                            <Buttons>
+                                <dx:EditButton ImagePosition="Right">
+                                    <Image IconID="spreadsheet_adddatasource_svg_dark_16x16"></Image>
+                                </dx:EditButton>
+                            </Buttons>
                         </PropertiesComboBox>
                     </dx:CardViewComboBoxColumn>
                 </Columns>
-
-                <EditFormLayoutProperties>
+                <EditFormLayoutProperties AlignItemCaptionsInAllGroups="True">
                     <Items>
                         <dx:CardViewCommandLayoutItem ColSpan="1" HorizontalAlign="Right">
                         </dx:CardViewCommandLayoutItem>
-                        <dx:CardViewColumnLayoutItem Caption="Nombre" ColSpan="1" ColumnName="name_environment">
-                        </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem Caption="Logo" ColSpan="1" ColumnName="logo">
-                        </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="url" Caption="Url">
-                        </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="ip_server" Caption="IP Servidor">
-                        </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="ip_database" Caption="IP Base de Datos">
-                        </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="management_db" Caption="Gestor de Base de Datos">
-                        </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="version_db" Caption="Versión del Gestor de Base de Datos">
-                        </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="number_module" Caption="Cantidad de Módulos del Entorno">
-                        </dx:CardViewColumnLayoutItem>
+                        <dx:CardViewLayoutGroup Caption="Informaci&#243;n del Entorno" ColSpan="1" CssClass="Titulo23">
+                            <Items>
+                                <dx:CardViewColumnLayoutItem ColumnName="name_environment" Caption="Nombre" ColSpan="1">
+                                    <CaptionStyle Font-Bold="False"></CaptionStyle>
+                                </dx:CardViewColumnLayoutItem>
+                                <dx:CardViewColumnLayoutItem ColumnName="logo" Caption="Logo" ColSpan="1">
+                                    <CaptionStyle Font-Bold="False"></CaptionStyle>
+                                </dx:CardViewColumnLayoutItem>
+                                <dx:CardViewColumnLayoutItem ColumnName="url" Caption="Url" ColSpan="1">
+                                    <CaptionStyle Font-Bold="False"></CaptionStyle>
+                                </dx:CardViewColumnLayoutItem>
+                            </Items>
+
+                            <GroupBoxStyle>
+                                <Caption Font-Size="Small" ForeColor="Black"></Caption>
+
+                                <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="2px"></Border>
+                            </GroupBoxStyle>
+                        </dx:CardViewLayoutGroup>
+                        <dx:CardViewLayoutGroup Caption="Informaci&#243;n de Base de Datos" ColSpan="1">
+                            <Items>
+                                <dx:CardViewColumnLayoutItem ColumnName="ip_server" Caption="IP Servidor" ColSpan="1"></dx:CardViewColumnLayoutItem>
+                                <dx:CardViewColumnLayoutItem ColumnName="ip_database" Caption="IP Base de Datos" ColSpan="1"></dx:CardViewColumnLayoutItem>
+                                <dx:CardViewColumnLayoutItem ColumnName="management_db" Caption="Gestor de Base de Datos" ColSpan="1"></dx:CardViewColumnLayoutItem>
+                                <dx:CardViewColumnLayoutItem ColumnName="version_db" Caption="Versi&#243;n del Gestor de Base de Datos" ColSpan="1"></dx:CardViewColumnLayoutItem>
+                            </Items>
+
+                            <GroupBoxStyle>
+                                <Caption Font-Size="Small" ForeColor="Black"></Caption>
+
+                                <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="2px"></Border>
+                            </GroupBoxStyle>
+                        </dx:CardViewLayoutGroup>
+                        <dx:CardViewLayoutGroup Caption="Informaci&#243;n de Modulos" ColSpan="1">
+                            <Items>
+                                <dx:CardViewColumnLayoutItem ColumnName="number_module" Caption="Cantidad de M&#243;dulos del Entorno" ColSpan="1"></dx:CardViewColumnLayoutItem>
+                            </Items>
+
+                            <GroupBoxStyle>
+                                <Caption Font-Size="Small" ForeColor="Black"></Caption>
+
+                                <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="2px"></Border>
+                            </GroupBoxStyle>
+                        </dx:CardViewLayoutGroup>
                         <dx:EditModeCommandLayoutItem ColSpan="1" HorizontalAlign="Right">
                         </dx:EditModeCommandLayoutItem>
                     </Items>
+
+                    <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit"></SettingsAdaptivity>
                 </EditFormLayoutProperties>
 
                 <CardLayoutProperties>
                     <Items>
                         <dx:CardViewCommandLayoutItem ColSpan="1" HorizontalAlign="Right" ShowEditButton="True">
                         </dx:CardViewCommandLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="name_environment" HorizontalAlign="Center">
+                        <dx:CardViewColumnLayoutItem Caption=" " ColSpan="1" ColumnName="name_environment" HorizontalAlign="Center">
                         </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="logo">
+                        <dx:CardViewColumnLayoutItem Caption=" " ColSpan="1" Width="125px" Height="100px" VerticalAlign="Middle" HorizontalAlign="Center" ColumnName="logo">
                         </dx:CardViewColumnLayoutItem>
                         <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="url" Visible="False">
                         </dx:CardViewColumnLayoutItem>
@@ -365,13 +407,13 @@
                         </dx:CardViewColumnLayoutItem>
                         <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="number_module" Visible="False">
                         </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewCommandLayoutItem ButtonRenderMode="Button" ColSpan="1">
+                        <dx:CardViewCommandLayoutItem ColSpan="1" ButtonRenderMode="Button" ShowRecoverButton="False">
                             <CustomButtons>
                                 <dx:CardViewCustomCommandButton ID="info" Text="INFORMACIÓN">
                                     <Styles>
                                         <Style BackColor="#0066CC" Cursor="pointer" ForeColor="White" Width="100%">
-                                            <HoverStyle BackColor="#0000CC" ForeColor="White" >
-                                            </HoverStyle >
+                                            <HoverStyle BackColor="#0000CC" ForeColor="White">
+                                            </HoverStyle>
                                             <Paddings Padding="5px" />
                                         </Style>
                                     </Styles>
@@ -411,15 +453,37 @@
 
                 <Border BorderColor="Transparent"></Border>
             </dx:ASPxCardView>
-            <asp:SqlDataSource ID="ComboBox" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [catalogue] WHERE ([name_catalogue] = @name_catalogue)">
-                <SelectParameters>
-                    <asp:Parameter DefaultValue="management_db" Name="name_catalogue" Type="String" />
-                </SelectParameters>
+            <asp:SqlDataSource ID="ComboBox" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [management_db]" DeleteCommand="DELETE FROM [management_db] WHERE [id] = @id" InsertCommand="INSERT INTO [management_db] ([id], [name_management], [img]) VALUES (@id, @name_management, @img)" UpdateCommand="UPDATE [management_db] SET [name_management] = @name_management, [img] = @img WHERE [id] = @id">
+                <DeleteParameters>
+                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="name_management" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="img" Type="String"></asp:Parameter>
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="name_management" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="img" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
+                </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="ComboBox0" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [catalogue] WHERE ([name_catalogue] = @name_catalogue)">
-                <SelectParameters>
-                    <asp:Parameter DefaultValue="version_db" Name="name_catalogue" Type="String" />
-                </SelectParameters>
+            <asp:SqlDataSource ID="ComboBox0" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [version_db]" DeleteCommand="DELETE FROM [version_db] WHERE [id] = @id" InsertCommand="INSERT INTO [version_db] ([id], [name_version], [img], [fk_management_db]) VALUES (@id, @name_version, @img, @fk_management_db)" UpdateCommand="UPDATE [version_db] SET [name_version] = @name_version, [img] = @img, [fk_management_db] = @fk_management_db WHERE [id] = @id">
+                <DeleteParameters>
+                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="name_version" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="img" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="fk_management_db" Type="Int32"></asp:Parameter>
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="name_version" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="img" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="fk_management_db" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
+                </UpdateParameters>
             </asp:SqlDataSource>
             <asp:SqlDataSource ID="ComboBox1" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [catalogue] WHERE ([name_catalogue] = @name_catalogue)">
                 <SelectParameters>

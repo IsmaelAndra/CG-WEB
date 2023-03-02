@@ -117,11 +117,8 @@
                         </Styles>
                      </CancelButton>
                 </SettingsCommandButton>
-
                 <SettingsExport ExportSelectedCardsOnly="False"></SettingsExport>
-
-                <SettingsLoadingPanel Text="Cargando" />
-
+                <SettingsLoadingPanel Text="Cargando..." />
                 <Columns>
                     <dx:CardViewTextColumn FieldName="id" ReadOnly="True" Visible="False">
                     </dx:CardViewTextColumn>
@@ -145,13 +142,12 @@
                     <dx:CardViewTextColumn FieldName="number_module" VisibleIndex="7">
                     </dx:CardViewTextColumn>
                     <dx:CardViewBinaryImageColumn Caption=" " FieldName="logo" VisibleIndex="1">
-                        <PropertiesBinaryImage ImageHeight="175px" ImageWidth="200px">
+                        <PropertiesBinaryImage ImageAlign="Middle" ImageHeight="100px" ImageWidth="125px">
                             <EditingSettings Enabled="True">
                             </EditingSettings>
                         </PropertiesBinaryImage>
                     </dx:CardViewBinaryImageColumn>
                 </Columns>
-
                 <EditFormLayoutProperties>
                     <Items>
                         <dx:CardViewCommandLayoutItem ColSpan="1" HorizontalAlign="Right">
@@ -176,14 +172,13 @@
                         </dx:EditModeCommandLayoutItem>
                     </Items>
                 </EditFormLayoutProperties>
-
                 <CardLayoutProperties>
                     <Items>
                         <dx:CardViewCommandLayoutItem ColSpan="1" HorizontalAlign="Right" ShowDeleteButton="True" ShowNewButton="True" ShowEditButton="True" Visible="False">
                         </dx:CardViewCommandLayoutItem>
                         <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="name_environment" HorizontalAlign="Center" Visible="False">
                         </dx:CardViewColumnLayoutItem>
-                        <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="logo">
+                        <dx:CardViewColumnLayoutItem ColSpan="1" Width="125px" Height="100px" VerticalAlign="Middle" HorizontalAlign="Center" ColumnName="logo">
                         </dx:CardViewColumnLayoutItem>
                         <dx:CardViewColumnLayoutItem ColSpan="1" ColumnName="url" Visible="False">
                         </dx:CardViewColumnLayoutItem>
@@ -211,35 +206,27 @@
                         </dx:CardViewCommandLayoutItem>
                     </Items>
                 </CardLayoutProperties>
-
                 <Styles>
-                    <Card Cursor="pointer" Font-Names="Bodoni MT" ForeColor="#0066FF" HorizontalAlign="Center" Font-Size="40pt">
+                    <Card Cursor="pointer" Font-Names="Bodoni MT" ForeColor="#0066FF" HorizontalAlign="Center" Font-Size="40pt" Width="125px" Height="100px">
                         <Border BorderStyle="None" />
                     </Card>
                     <PagerBottomPanel>
                         <Border BorderStyle="None" />
                     </PagerBottomPanel>
                 </Styles>
-
                 <StylesExport>
                     <Card BorderSize="1" BorderSides="All"></Card>
-
                     <Group BorderSize="1" BorderSides="All"></Group>
-
                     <TabbedGroup BorderSize="1" BorderSides="All"></TabbedGroup>
-
                     <Tab BorderSize="1"></Tab>
                 </StylesExport>
-
 <Images>
 <LoadingPanel IconID="xaf_action_reload_svg_32x32"></LoadingPanel>
 </Images>
-
                 <StylesEditors>
                     <LoadingPanel BackColor="#0066FF">
                     </LoadingPanel>
                 </StylesEditors>
-
 <Border BorderColor="Transparent"></Border>
             </dx:ASPxCardView>
             <asp:SqlDataSource ID="ComboBox" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [catalogue] WHERE ([name_catalogue] = @name_catalogue)" OnSelecting="ComboBox_Selecting">
