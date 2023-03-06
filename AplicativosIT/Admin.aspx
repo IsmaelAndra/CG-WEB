@@ -21,6 +21,20 @@
         .Titulo23 {
             color: black;
         }
+        .NombreInfo {
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .NombreInfo2 {
+            width: 100%;
+            color: blue;
+        }
+        .NombreCard {
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+        }
     </style>
     <script type="text/javascript">
         function OnCardSelectionChanged(s, e) {
@@ -61,17 +75,14 @@
             };
         }
 
-        var lastManagement = null;
-        function OnManagementChanged(cmbManagement) {
-            if (cmbVersion.InCallback())
-                lastManagement = cmbManagement.GetValue().toString();
-            else
-                cmbVersion.PerformCallback(cmbManagement.GetValue().toString());
+        function OnFocusedCardChanged() {
+            CardView.GetCardValues(CardView.GetFocusedCardIndex(), 'name_environment;ip_server;ip_database;management_db;version_db;number_module', OnGetCardValues);
         }
-        function OnEndCallback(s, e) {
-            if (lastManagement) {
-                cmbVersion.PerformCallback(lastManagement);
-                lastManagement = null;
+        function OnGetCardValues(values) {
+            var editors = [name_environment, ip_server, ip_database, management_db, version_db, number_module];
+            for (var i = 0; i < editors.length; i++) {
+                var editor = editors[i];
+                editor.SetValue(values[i]);
             }
         }
     </script>
@@ -303,140 +314,74 @@
 
     <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" Width="546px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
         PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcInfo"
-        HeaderText="Información" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+        HeaderText='INFORMACIÓN' AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
         <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
         <ContentCollection>
             <dx:PopupControlContentControl runat="server">
                 <dx:ASPxPanel ID="ASPxPanel1" runat="server" DefaultButton="btOK" Width="458px">
                     <PanelCollection>
                         <dx:PanelContent runat="server">
-                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT [id], [ip_server], [ip_database], [management_db], [version_db], [number_module] FROM [info_environmentt]" DeleteCommand="DELETE FROM [info_environmentt] WHERE [id] = @id" InsertCommand="INSERT INTO [info_environmentt] ([ip_server], [ip_database], [management_db], [version_db], [number_module]) VALUES (@ip_server, @ip_database, @management_db, @version_db, @number_module)" UpdateCommand="UPDATE [info_environmentt] SET [ip_server] = @ip_server, [ip_database] = @ip_database, [management_db] = @management_db, [version_db] = @version_db, [number_module] = @number_module WHERE [id] = @id">
-                                <DeleteParameters>
-                                    <asp:Parameter Name="id" Type="Int32" />
-                                </DeleteParameters>
-                                <InsertParameters>
-                                    <asp:Parameter Name="ip_server" Type="String" />
-                                    <asp:Parameter Name="ip_database" Type="String" />
-                                    <asp:Parameter Name="management_db" Type="String" />
-                                    <asp:Parameter Name="version_db" Type="String" />
-                                    <asp:Parameter Name="number_module" Type="Int32" />
-                                </InsertParameters>
-                                <UpdateParameters>
-                                    <asp:Parameter Name="ip_server" Type="String" />
-                                    <asp:Parameter Name="ip_database" Type="String" />
-                                    <asp:Parameter Name="management_db" Type="String" />
-                                    <asp:Parameter Name="version_db" Type="String" />
-                                    <asp:Parameter Name="number_module" Type="Int32" />
-                                    <asp:Parameter Name="id" Type="Int32" />
-                                </UpdateParameters>
-                            </asp:SqlDataSource>
+                            <dx:ASPxFormLayout ID="Details" ClientInstanceName="Details" runat="server" Width="100%" Theme="MetropolisBlue">
+                                <Items>
+                                    <dx:LayoutItem Caption=" " FieldName="name_environment" CssClass="NombreInfo" ColSpan="1">
+                                        <LayoutItemNestedControlCollection>
+                                            <dx:LayoutItemNestedControlContainer runat="server">
+                                                <dx:ASPxLabel runat="server" ClientInstanceName="name_environment" CssClass="NombreInfo2" ID="name_environment"></dx:ASPxLabel>
 
-                            <dx:ASPxGridView ID="ASPxGridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" Width="354px" KeyFieldName="id" Theme="MetropolisBlue" Images-DetailCollapsedButton-IconID="iconbuilder_actions_arrow3right_svg_gray_16x16" Images-DetailExpandedButton-IconID="iconbuilder_actions_arrow3up_svg_gray_16x16">
-                                <SettingsPager>
-                                    <FirstPageButton>
-                                        <Image IconID="arrows_prev_svg_16x16">
-                                        </Image>
-                                    </FirstPageButton>
-                                    <LastPageButton>
-                                        <Image IconID="arrows_prev_svg_16x16">
-                                        </Image>
-                                    </LastPageButton>
-                                    <NextPageButton>
-                                        <Image IconID="arrows_next_svg_16x16">
-                                        </Image>
-                                    </NextPageButton>
-                                    <PrevPageButton>
-                                        <Image IconID="arrows_prev_svg_16x16">
-                                        </Image>
-                                    </PrevPageButton>
-                                </SettingsPager>
-                                <SettingsPopup>
-                                    <FilterControl AutoUpdatePosition="False">
-                                    </FilterControl>
-                                </SettingsPopup>
-                                <SettingsAdaptivity>
-                                    <AdaptiveDetailLayoutProperties>
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                    </dx:LayoutItem>
+                                    <dx:LayoutItem Caption=" ">
+                                    </dx:LayoutItem>
+                                    <dx:LayoutGroup Caption="Información del Entorno">
+                                        <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
+
+                                        <GroupBoxStyle>
+                                            <Caption Font-Size="15px" ForeColor="Black"></Caption>
+
+                                            <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
+                                        </GroupBoxStyle>
                                         <Items>
-                                            <dx:GridViewColumnLayoutItem ColSpan="1" ColumnName="id">
-                                            </dx:GridViewColumnLayoutItem>
-                                            <dx:GridViewColumnLayoutItem ColSpan="1" ColumnName="ip_server" Caption="IP Servidor">
-                                            </dx:GridViewColumnLayoutItem>
-                                            <dx:GridViewColumnLayoutItem ColSpan="1" ColumnName="ip_database" Caption="IP Base de Datos">
-                                            </dx:GridViewColumnLayoutItem>
-                                            <dx:GridViewColumnLayoutItem ColSpan="1" ColumnName="management_db" Caption="Gestor Base de Datos">
-                                            </dx:GridViewColumnLayoutItem>
-                                            <dx:GridViewColumnLayoutItem ColSpan="1" ColumnName="version_db" Caption="Versión Base de Datos">
-                                            </dx:GridViewColumnLayoutItem>
-                                            <dx:GridViewColumnLayoutItem ColSpan="1" ColumnName="number_module" Caption="Número de Modulos">
-                                            </dx:GridViewColumnLayoutItem>
+                                            <dx:LayoutItem Caption="IP de Servidor de Aplicativo" FieldName="ip_server">
+                                                <LayoutItemNestedControlCollection>
+                                                    <dx:LayoutItemNestedControlContainer>
+                                                        <dx:ASPxLabel ID="ip_server" ClientInstanceName="ip_server" runat="server" />
+                                                    </dx:LayoutItemNestedControlContainer>
+                                                </LayoutItemNestedControlCollection>
+                                            </dx:LayoutItem>
+                                            <dx:LayoutItem Caption="IP de Servidor de Base de Datos" FieldName="ip_database" RowSpan="3">
+                                                <LayoutItemNestedControlCollection>
+                                                    <dx:LayoutItemNestedControlContainer>
+                                                        <dx:ASPxLabel ID="ip_database" ClientInstanceName="ip_database" runat="server" />
+                                                    </dx:LayoutItemNestedControlContainer>
+                                                </LayoutItemNestedControlCollection>
+                                            </dx:LayoutItem>
+                                            <dx:LayoutItem Caption="Gestor de Base de Datos" FieldName="management_db">
+                                                <LayoutItemNestedControlCollection>
+                                                    <dx:LayoutItemNestedControlContainer>
+                                                        <dx:ASPxLabel ID="management_db" ClientInstanceName="management_db" runat="server" />
+                                                    </dx:LayoutItemNestedControlContainer>
+                                                </LayoutItemNestedControlCollection>
+                                            </dx:LayoutItem>
+                                            <dx:LayoutItem Caption="Versi&#243;n del Gestor de Base de Datos" FieldName="version_db">
+                                                <LayoutItemNestedControlCollection>
+                                                    <dx:LayoutItemNestedControlContainer>
+                                                        <dx:ASPxLabel ID="version_db" ClientInstanceName="version_db" runat="server" />
+                                                    </dx:LayoutItemNestedControlContainer>
+                                                </LayoutItemNestedControlCollection>
+                                            </dx:LayoutItem>
+                                            <dx:LayoutItem Caption="Cantidad de M&#243;dulos del Entorno" FieldName="number_module" ColSpan="1">
+                                                <LayoutItemNestedControlCollection>
+                                                    <dx:LayoutItemNestedControlContainer>
+                                                        <dx:ASPxLabel ID="number_module" ClientInstanceName="number_module" runat="server" />
+                                                    </dx:LayoutItemNestedControlContainer>
+                                                </LayoutItemNestedControlCollection>
+                                            </dx:LayoutItem>
                                         </Items>
-                                    </AdaptiveDetailLayoutProperties>
-                                </SettingsAdaptivity>
-                                <Templates>
-                                    <DetailRow>
-                                        <dx:ASPxGridView ID="detailGrid" runat="server" DataSourceID="SqlDataSource3" KeyFieldName="id;fk_environment"
-                                            Width="100%" EnablePagingGestures="True">
-                                            <Columns>
-                                                <dx:GridViewDataTextColumn FieldName="name_module" ShowInCustomizationForm="True" VisibleIndex="0">
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="name_database" ShowInCustomizationForm="True" VisibleIndex="1">
-                                                </dx:GridViewDataTextColumn>
-                                            </Columns>
-                                            <Settings ShowFooter="True" />
-                                            <SettingsPager EnableAdaptivity="true" />
-                                            <Styles Header-Wrap="True" />
-                                        </dx:ASPxGridView>
-                                    </DetailRow>
-                                </Templates>
-                                <SettingsDetail ShowDetailRow="true" AllowOnlyOneMasterRowExpanded="true" />
-                                <Columns>
-                                    <dx:GridViewDataTextColumn FieldName="id" ReadOnly="True" ShowInCustomizationForm="True" VisibleIndex="0">
-                                        <EditFormSettings Visible="False" />
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="ip_server" ShowInCustomizationForm="True" VisibleIndex="1">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="ip_database" ShowInCustomizationForm="True" VisibleIndex="2">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="management_db" ShowInCustomizationForm="True" VisibleIndex="3">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="version_db" ShowInCustomizationForm="True" VisibleIndex="4">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="number_module" ShowInCustomizationForm="True" VisibleIndex="5">
-                                    </dx:GridViewDataTextColumn>
-                                </Columns>
-                                <Styles>
-                                    <Table>
-                                        <Border BorderColor="Gray" BorderStyle="Solid" BorderWidth="2px" />
-                                    </Table>
-                                    <Header BackColor="#0066FF" ForeColor="White">
-                                    </Header>
-                                </Styles>
-
-                                <Images>
-                                    <DetailCollapsedButton IconID="iconbuilder_actions_arrow3right_svg_gray_16x16"></DetailCollapsedButton>
-
-                                    <DetailExpandedButton IconID="iconbuilder_actions_arrow3down_svg_dark_16x16"></DetailExpandedButton>
-                                </Images>
-
-                                <Border BorderStyle="None" />
-                            </dx:ASPxGridView>
-                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" DeleteCommand="DELETE FROM [module] WHERE [id] = @id" InsertCommand="INSERT INTO [module] ([name_module], [name_database], [fk_environment]) VALUES (@name_module, @name_database, @fk_environment)" SelectCommand="SELECT * FROM [module]" UpdateCommand="UPDATE [module] SET [name_module] = @name_module, [name_database] = @name_database, [fk_environment] = @fk_environment WHERE [id] = @id">
-                                <DeleteParameters>
-                                    <asp:Parameter Name="id" Type="Int32" />
-                                </DeleteParameters>
-                                <InsertParameters>
-                                    <asp:Parameter Name="name_module" Type="String" />
-                                    <asp:Parameter Name="name_database" Type="String" />
-                                    <asp:Parameter Name="fk_environment" Type="Int32" />
-                                </InsertParameters>
-                                <UpdateParameters>
-                                    <asp:Parameter Name="name_module" Type="String" />
-                                    <asp:Parameter Name="name_database" Type="String" />
-                                    <asp:Parameter Name="fk_environment" Type="Int32" />
-                                    <asp:Parameter Name="id" Type="Int32" />
-                                </UpdateParameters>
-                            </asp:SqlDataSource>
-                            <br />
+                                    </dx:LayoutGroup>
+                                </Items>
+                                <Styles LayoutItem-Caption-Font-Bold="true" />
+                            </dx:ASPxFormLayout>
                         </dx:PanelContent>
                     </PanelCollection>
                 </dx:ASPxPanel>
@@ -450,8 +395,8 @@
 
     <div class="row">
         <div class="col-md-4">
-            <dx:ASPxCardView CssClass="card-view" ID="CardView" runat="server" AutoGenerateColumns="False" DataSourceID="CardView1" KeyFieldName="id" EnableTheming="True" Width="864px" Border-BorderColor="Transparent" Theme="MetropolisBlue">
-                <ClientSideEvents CardClick="OnCardSelectionChanged" CustomButtonClick="function(s, e) { ShowInfo(); }" />
+            <dx:ASPxCardView CssClass="card-view" ID="CardView" ClientInstanceName="CardView" runat="server" AutoGenerateColumns="False" DataSourceID="CardView1" KeyFieldName="id" EnableTheming="True" Width="864px" Border-BorderColor="Transparent" Theme="MetropolisBlue">
+                <ClientSideEvents CardClick="OnCardSelectionChanged" FocusedCardChanged="OnFocusedCardChanged" CustomButtonClick="function(s, e) { ShowInfo(); }" />
                 <SettingsPager>
                     <FirstPageButton>
                         <Image IconID="arrows_prev_svg_16x16">
@@ -553,7 +498,6 @@
                     </dx:CardViewBinaryImageColumn>
                     <dx:CardViewComboBoxColumn FieldName="management_db" VisibleIndex="4">
                         <PropertiesComboBox ShowImageInEditBox="True" DataSourceID="ComboBox" ImageUrlField="img" TextField="name_management" ValueField="name_management" Width="90%">
-                            <ClientSideEvents SelectedIndexChanged="function(s, e) { OnManagementChanged(s); }" />
                             <ItemImage Height="24px" Width="23px" />
                             <Buttons>
                                 <dx:EditButton ImagePosition="Right">
@@ -564,7 +508,6 @@
                     </dx:CardViewComboBoxColumn>
                     <dx:CardViewComboBoxColumn FieldName="version_db" VisibleIndex="5">
                         <PropertiesComboBox ShowImageInEditBox="True" DataSourceID="ComboBox0" ImageUrlField="img" TextField="name_version" ValueField="name_version" Width="90%">
-                            <ClientSideEvents EndCallback=" OnEndCallback" />
                             <ItemImage Height="24px" Width="23px" />
                             <Buttons>
                                 <dx:EditButton ImagePosition="Right">
@@ -633,7 +576,7 @@
                     <Items>
                         <dx:CardViewCommandLayoutItem ColSpan="1" HorizontalAlign="Right" ShowDeleteButton="True" ShowEditButton="True">
                         </dx:CardViewCommandLayoutItem>
-                        <dx:CardViewColumnLayoutItem Caption=" " ColSpan="1" ColumnName="name_environment" HorizontalAlign="Center">
+                        <dx:CardViewColumnLayoutItem Caption=" " ColSpan="1" ColumnName="name_environment" HorizontalAlign="Center" CssClass="NombreCard">
                         </dx:CardViewColumnLayoutItem>
                         <dx:CardViewColumnLayoutItem Caption=" " ColSpan="1" Width="125px" Height="100px" VerticalAlign="Middle" HorizontalAlign="Center" ColumnName="logo">
                         </dx:CardViewColumnLayoutItem>

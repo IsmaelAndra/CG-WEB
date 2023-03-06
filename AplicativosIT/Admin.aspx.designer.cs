@@ -96,31 +96,67 @@ namespace AplicativosIT
         protected global::DevExpress.Web.ASPxPanel ASPxPanel1;
 
         /// <summary>
-        /// Control SqlDataSource2.
+        /// Control Details.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
+        protected global::DevExpress.Web.ASPxFormLayout Details;
 
         /// <summary>
-        /// Control ASPxGridView1.
+        /// Control name_environment.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxGridView ASPxGridView1;
+        protected global::DevExpress.Web.ASPxLabel name_environment;
 
         /// <summary>
-        /// Control SqlDataSource3.
+        /// Control ip_server.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
+        protected global::DevExpress.Web.ASPxLabel ip_server;
+
+        /// <summary>
+        /// Control ip_database.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel ip_database;
+
+        /// <summary>
+        /// Control management_db.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel management_db;
+
+        /// <summary>
+        /// Control version_db.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel version_db;
+
+        /// <summary>
+        /// Control number_module.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel number_module;
 
         /// <summary>
         /// Control CardView.
