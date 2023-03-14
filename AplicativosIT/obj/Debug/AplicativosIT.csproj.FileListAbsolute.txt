@@ -1600,3 +1600,4 @@ C:\Users\Usuario\Desktop\CG-WEB-loginC\CG-WEB-loginC\AplicativosIT\obj\Debug\Apl
 C:\Users\Usuario\Desktop\CG-WEB-loginC\CG-WEB-loginC\AplicativosIT\obj\Debug\AplicativosIT.csproj.CopyComplete
 C:\Users\Usuario\Desktop\CG-WEB-loginC\CG-WEB-loginC\AplicativosIT\obj\Debug\AplicativosIT.dll
 C:\Users\Usuario\Desktop\CG-WEB-loginC\CG-WEB-loginC\AplicativosIT\obj\Debug\AplicativosIT.pdb
+C:\Users\Usuario\Desktop\CG-WEB-loginC\CG-WEB-loginC\AplicativosIT\bin\ucajax.dll
