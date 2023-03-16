@@ -74,7 +74,7 @@
                                     </tr>
                                     <tr>
                                     <td style="padding:2px;" class="auto-style2">
-                                        <input type="text" id="UserName" class="auto-style3" />
+                                        <asp:TextBox  runat="server" type="text" id="UserName" class="auto-style3" ></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -84,12 +84,13 @@
                                     </tr>
                                 <tr>
                                     <td style="padding:2px;" class="auto-style2">
-                                        <input type="password" id="Password" class="auto-style3" />
+                                        <asp:TextBox  runat="server" type="text" id="Password" class="auto-style3" ></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="center" colspan="2" style="padding:6px;" class="auto-style2">
-                                        <button type="button" class="btn btn-secondary" onclick="login()">Iniciar Sesión</button>
+                                        <asp:Button runat="server" id="ingresar" class="btn btn-secondary" text="Ingresar" OnClick="Login"/>
+
                                     </td>
                                 </tr>
                             </table>
