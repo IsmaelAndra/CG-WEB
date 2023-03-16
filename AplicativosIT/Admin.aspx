@@ -46,6 +46,28 @@
         .botonActivo {
             cursor: pointer;
         }
+        .btnsPopup {
+            margin: 0 auto;
+        }
+        .TextoPopup {
+            text-align: center;
+        }
+        .btns {
+            padding: 5px;
+            margin: 10px auto;
+            background-color: #0066CC;
+            cursor: pointer;
+            border: 1px solid #C0C0C0;
+            color: white;
+        }
+        .btns:hover {
+            background-color: #0000CC;
+            border: 1px solid #C0C0C0;
+            color: white;
+        }
+        .btn {
+            padding: 3px;
+        }
     </style>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -108,26 +130,12 @@
                 editor.SetValue(values[i]);
             }
         }
-        function Close_EditCardView() {
-            pcButtons.Show();
-        }
-
-        function Cancel_Edit() {
-            PageMethods.Close(OnSucceeded, OnFailed);
-        }
-
-        function OnSucceeded() {
-            alert(':D');
-        }
-
-        function OnFailed() {
-            alert('No')
+        function Close_Edit() {
+            pcCancelar.Show();
         }
 
         function Update_Edit() {
-            $.ajax({
-                url: "Admin.aspx/Update"
-            })
+            pcActualizar.Show();
         }
     </script>
     <link href="./Styles/DefaultStyles.css" rel="stylesheet" type="text/css" />
@@ -158,7 +166,7 @@
     </div>
     <dx:ASPxPopupControl ID="pcUsuarios" runat="server" Width="518px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
         PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcUsuarios"
-        HeaderText="Usuarios" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+        HeaderText="Usuarios" HeaderImage-IconID="people_usergroup_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
         <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); tbLogin.Focus(); }" />
         <ContentCollection>
             <dx:PopupControlContentControl runat="server">
@@ -195,19 +203,17 @@
                                     </NewButton>
                                     <UpdateButton Text="Actualizar" RenderMode="Button">
                                         <Styles>
-                                            <Style BackColor="#0066CC" Cursor="pointer" ForeColor="White">
+                                            <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White">
                                                  <HoverStyle BackColor="#0000CC" ForeColor="White" >
                                                 </HoverStyle >
-                                                <Paddings Padding="5px" / >
                                             </Style>
                                         </Styles>
                                     </UpdateButton>
                                     <CancelButton Text="Cancelar" RenderMode="Button">
                                         <Styles>
-                                            <Style BackColor="#0066CC" Cursor="pointer" ForeColor="White">
+                                            <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White">
                                                  <HoverStyle BackColor="#0000CC" ForeColor="White" >
                                                 </HoverStyle >
-                                                <Paddings Padding="5px" / >
                                             </Style>
                                         </Styles>
                                     </CancelButton>
@@ -216,13 +222,15 @@
                                         <Image IconID="arrows_next_svg_16x16"></Image>
                                     </EndlessPagingShowMoreCardsButton>
                                 </SettingsCommandButton>
+                                <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" EnableCardHotTrack="true" />
+                                <SettingsText PopupEditFormCaption="Formulario de Edición" ConfirmDelete="¿Desea eliminar el Usuario?" />
                                 <Columns>
                                     <dx:CardViewTextColumn FieldName="id" ReadOnly="True" ShowInCustomizationForm="True" Visible="False">
                                     </dx:CardViewTextColumn>
                                     <dx:CardViewTextColumn FieldName="name_user" ShowInCustomizationForm="True" VisibleIndex="0">
                                     </dx:CardViewTextColumn>
                                     <dx:CardViewTextColumn FieldName="password" ShowInCustomizationForm="True" VisibleIndex="1">
-                                        <PropertiesTextEdit Native="True"></PropertiesTextEdit>
+                                        <PropertiesTextEdit Native="True" Password="True"></PropertiesTextEdit>
                                     </dx:CardViewTextColumn>
                                     <dx:CardViewTextColumn FieldName="name" ShowInCustomizationForm="True" VisibleIndex="2">
                                     </dx:CardViewTextColumn>
@@ -359,7 +367,7 @@
 
     <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" Width="546px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
         PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcInfo"
-        HeaderText='INFORMACIÓN' AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+        HeaderText='INFORMACIÓN' HeaderImage-IconID="xaf_state_validation_information_svg_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
         <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
         <ContentCollection>
             <dx:PopupControlContentControl runat="server">
@@ -467,7 +475,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <dx:ASPxCardView CssClass="card-view" ID="CardView" ClientInstanceName="CardView" runat="server" AutoGenerateColumns="False" DataSourceID="CardView1" KeyFieldName="id" EnableTheming="True" Width="864px" Border-BorderColor="Transparent" Theme="MetropolisBlue">
+            <dx:ASPxCardView Images-PopupEditFormWindowClose-IconID=" " CssClass="card-view" ID="CardView" ClientInstanceName="CardView" runat="server" AutoGenerateColumns="False" DataSourceID="CardView1" KeyFieldName="id" EnableTheming="True" Width="864px" Border-BorderColor="Transparent" Theme="MetropolisBlue">
                 <ClientSideEvents CardClick="OnCardSelectionChanged" FocusedCardChanged="OnFocusedCardChanged" CustomButtonClick="function(s, e) { ShowInfo(); }" />
                 <SettingsPager>
                     <FirstPageButton>
@@ -492,7 +500,7 @@
                 </SettingsEditing>
                 <SettingsBehavior AllowFocusedCard="True" AllowSelectByCardClick="true" />
                 <SettingsPopup>
-                    <FilterControl AutoUpdatePosition="False"></FilterControl>
+                    <FilterControl AutoUpdatePosition="True" ></FilterControl>
                 </SettingsPopup>
                 <SettingsCommandButton>
                     <EditButton Text=" ">
@@ -506,19 +514,17 @@
                     </NewButton>
                     <UpdateButton Text="Actualizar" RenderMode="Button">
                         <Styles>
-                            <Style BackColor="#0066CC" Cursor="pointer" ForeColor="White">
+                            <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White">
                                  <HoverStyle BackColor="#0000CC" ForeColor="White" >
                                  </HoverStyle >
-                                 <Paddings Padding="5px" / >
                             </Style>
                         </Styles>
                     </UpdateButton>
                     <CancelButton Text="Cancelar" RenderMode="Button">
                         <Styles>
-                            <Style BackColor="#0066CC" Cursor="pointer" ForeColor="White">
+                            <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White">
                                  <HoverStyle BackColor="#0000CC" ForeColor="White" >
                                  </HoverStyle >
-                                 <Paddings Padding="5px" / >
                             </Style>
                         </Styles>
                     </CancelButton>
@@ -529,7 +535,7 @@
                 <SettingsLoadingPanel Text="Cargando..." />
 
                 <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" EnableCardHotTrack="true" />
-                <SettingsText ConfirmDelete="Desea eliminar el Entorno?" />
+                <SettingsText PopupEditFormCaption="Formulario de Edición" ConfirmDelete="¿Desea eliminar el Entorno?" />
 
                 <Columns>
                     <dx:CardViewTextColumn FieldName="id" ReadOnly="True" Visible="False">
@@ -592,8 +598,8 @@
                     <dx:CardViewButtonEditColumn FieldName="number_module" Name="BOTTON" VisibleIndex="7">
                         <PropertiesButtonEdit Width="100%">
                             <ClientSideEvents ButtonClick="function(s, e) {
-	ShowGridView();
-}"></ClientSideEvents>
+	                                ShowGridView();
+                                }"></ClientSideEvents>
                             <Buttons>
                                 <dx:EditButton Position="Left" Text="Agregar Modulo" CssClass="boton_modulos">
                                     <Image IconID="iconbuilder_actions_addcircled_svg_dark_16x16"></Image>
@@ -613,11 +619,32 @@
                             </Style>
                         </PropertiesButtonEdit>
                     </dx:CardViewButtonEditColumn>
-                    <dx:CardViewButtonEditColumn Caption="Buttons" Name="Buttons" VisibleIndex="8">
+                    <dx:CardViewButtonEditColumn Caption="btnUpdate" Name="btnUpdate" VisibleIndex="8">
                         <PropertiesButtonEdit Width="100%">
                             <ClientSideEvents ButtonClick="function(s, e) {
-	Cancel_Edit();
-}"></ClientSideEvents>
+	                                Update_Edit();
+                                }"></ClientSideEvents>
+                            <Buttons>
+                                <dx:EditButton Text="Actualizar"></dx:EditButton>
+                            </Buttons>
+                            <ButtonStyle BackColor="#0066CC" Cursor="pointer" ForeColor="White">
+                                <HoverStyle BackColor="#0000CC" ForeColor="White"></HoverStyle>
+
+                                <Paddings Padding="10px"></Paddings>
+
+                                <Border BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"></Border>
+                            </ButtonStyle>
+
+                            <Style Cursor="default">
+                                <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px" > </Border >
+                            </Style>
+                        </PropertiesButtonEdit>
+                    </dx:CardViewButtonEditColumn>
+                    <dx:CardViewButtonEditColumn Caption="btnCancel" Name="btnCancel" VisibleIndex="8">
+                        <PropertiesButtonEdit Width="100%">
+                            <ClientSideEvents ButtonClick="function(s, e) {
+	                                Close_Edit();
+                                }"></ClientSideEvents>
                             <Buttons>
                                 <dx:EditButton Text="Cancelar"></dx:EditButton>
                             </Buttons>
@@ -629,7 +656,7 @@
                                 <Border BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"></Border>
                             </ButtonStyle>
 
-                            <Style>
+                            <Style Cursor="default">
                                 <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px" > </Border >
                             </Style>
                         </PropertiesButtonEdit>
@@ -678,9 +705,6 @@
                                 <dx:CardViewColumnLayoutItem ColumnName="BOTTON" Caption="Cantidad de Modulos" ColSpan="1" Width="0%">
                                     <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
                                 </dx:CardViewColumnLayoutItem>
-                                <dx:CardViewColumnLayoutItem ColumnName="Buttons" Caption=" " ColSpan="1">
-                                    <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
-                                </dx:CardViewColumnLayoutItem>
                             </Items>
 
                             <GroupBoxStyle>
@@ -689,8 +713,12 @@
                                 <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="2px"></Border>
                             </GroupBoxStyle>
                         </dx:CardViewLayoutGroup>
-
-                        <dx:EditModeCommandLayoutItem ShowCancelButton="False" ShowUpdateButton="true" ColSpan="1" HorizontalAlign="Right"></dx:EditModeCommandLayoutItem>
+                        <dx:CardViewColumnLayoutItem ColumnName="btnUpdate" Caption=" " ColSpan="1">
+                            <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
+                        </dx:CardViewColumnLayoutItem>
+                        <dx:CardViewColumnLayoutItem ColumnName="btnCancel" Caption=" " ColSpan="1">
+                            <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
+                        </dx:CardViewColumnLayoutItem>
                     </Items>
 
                     <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit"></SettingsAdaptivity>
@@ -720,10 +748,9 @@
                             <CustomButtons>
                                 <dx:CardViewCustomCommandButton ID="info" Text="INFORMACIÓN">
                                     <Styles>
-                                        <Style BackColor="#0066CC" Cursor="pointer" ForeColor="White" Width="100%">
+                                        <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White" Width="100%">
                                                 <HoverStyle BackColor="#0000CC" ForeColor="White" >
                                                 </HoverStyle >
-                                                <Paddings Padding="5px" / >
                                         </Style>
                                     </Styles>
                                 </dx:CardViewCustomCommandButton>
@@ -766,7 +793,7 @@
 
             <dx:ASPxPopupControl ID="ASPxPopupControl3" runat="server" Width="670px" ContentStyle-Paddings-Padding="10px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
                 PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcModulos"
-                HeaderText='MODULOS' AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+                HeaderText='MODULOS' HeaderImage-IconID="spreadsheet_allowuserstoeditranges_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
                 <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
                 <ContentCollection>
                     <dx:PopupControlContentControl runat="server">
@@ -791,6 +818,7 @@
                                             </CancelButton>
                                         </SettingsCommandButton>
                                         <SettingsEditing EditFormColumnCount="3" Mode="PopupEditForm" />
+                                        <SettingsText PopupEditFormCaption="Formulario de Edición" />
                                         <EditFormLayoutProperties ColCount="3" ColumnCount="3">
                                             <Items>
                                                 <dx:GridViewLayoutGroup Caption="Modulos" ColSpan="3" ColumnSpan="3">
@@ -832,7 +860,7 @@
                                         </SettingsPopup>
                                         <SettingsPager Mode="ShowAllRecords" />
                                         <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" EnableRowHotTrack="true" />
-                                        <SettingsText ConfirmDelete="Desea eliminar el modulo?" />
+                                        <SettingsText ConfirmDelete="¿Desea eliminar el modulo?" />
                                     </dx:ASPxGridView>
                                 </dx:PanelContent>
                             </PanelCollection>
@@ -847,7 +875,7 @@
 
             <dx:ASPxPopupControl ID="PopupComboBox" runat="server" Width="720px" ContentStyle-Paddings-Padding="10px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
                 PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcManagement"
-                HeaderText='GESTOR DE BASE DE DATOS' AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+                HeaderText='GESTOR DE BASE DE DATOS' HeaderImage-IconID="data_database_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
                 <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
                 <ContentCollection>
                     <dx:PopupControlContentControl runat="server">
@@ -906,6 +934,7 @@
                                             </EditForm>
                                         </SettingsPopup>
                                         <SettingsPager Mode="ShowAllRecords" />
+                                        <SettingsText PopupEditFormCaption="Formulario de Edición" />
                                     </dx:ASPxGridView>
                                 </dx:PanelContent>
                             </PanelCollection>
@@ -920,7 +949,7 @@
 
             <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" Width="940px" ContentStyle-Paddings-Padding="10px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
                 PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcVersion"
-                HeaderText='VERSION DEL GESTOR DE BASE DE DATOS' AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+                HeaderText='VERSION DEL GESTOR DE BASE DE DATOS' HeaderImage-IconID="data_database_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
                 <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
                 <ContentCollection>
                     <dx:PopupControlContentControl runat="server">
@@ -980,8 +1009,60 @@
                                         </SettingsPopup>
                                         <SettingsPager Mode="ShowAllRecords" />
                                         <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" EnableRowHotTrack="true" />
-                                        <SettingsText ConfirmDelete="Desea eliminar la versión del gestor de base de datos?" />
+                                        <SettingsText PopupEditFormCaption="Formulario de Edición" ConfirmDelete="¿Desea eliminar la versión del gestor de base de datos?" />
                                     </dx:ASPxGridView>
+                                </dx:PanelContent>
+                            </PanelCollection>
+                        </dx:ASPxPanel>
+                    </dx:PopupControlContentControl>
+                </ContentCollection>
+                <ContentStyle>
+                    <Paddings PaddingBottom="5px" />
+                </ContentStyle>
+                <Border BorderColor="#0066FF" BorderStyle="Solid" BorderWidth="3px" />
+            </dx:ASPxPopupControl>
+
+            <dx:ASPxPopupControl ID="PopupCancel" runat="server" Width="440px" ContentStyle-Paddings-Padding="10px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
+                PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcCancelar"
+                HeaderText="Alerta" HeaderImage-IconID="xaf_state_validation_information_svg_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+                <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
+                <ContentCollection>
+                    <dx:PopupControlContentControl runat="server">
+                        <dx:ASPxPanel ID="ASPxPanel6" runat="server" DefaultButton="btOK" Width="458px">
+                            <PanelCollection>
+                                <dx:PanelContent runat="server">
+                                    <div class="TextoPopup">
+                                        <h4>¿Desea cancelar todos los cambios generados en el formulario de edición?</h4>
+                                        <div class="btnsPopup">
+                                            <asp:Button runat="server" OnClick="Close" Text="Aceptar" CssClass="btns" />
+                                        </div>
+                                    </div>
+                                </dx:PanelContent>
+                            </PanelCollection>
+                        </dx:ASPxPanel>
+                    </dx:PopupControlContentControl>
+                </ContentCollection>
+                <ContentStyle>
+                    <Paddings PaddingBottom="5px" />
+                </ContentStyle>
+                <Border BorderColor="#0066FF" BorderStyle="Solid" BorderWidth="3px" />
+            </dx:ASPxPopupControl>
+
+            <dx:ASPxPopupControl ID="PopupActualizar" runat="server" Width="440px" ContentStyle-Paddings-Padding="10px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
+                PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcActualizar"
+                HeaderText="Alerta" HeaderImage-IconID="xaf_state_validation_information_svg_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+                <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
+                <ContentCollection>
+                    <dx:PopupControlContentControl runat="server">
+                        <dx:ASPxPanel ID="ASPxPanel5" runat="server" DefaultButton="btOK" Width="458px">
+                            <PanelCollection>
+                                <dx:PanelContent runat="server">
+                                    <div class="TextoPopup">
+                                        <h4>¿Desea enviar la actualización del formulario de edición?</h4>
+                                        <div class="btnsPopup">
+                                            <asp:Button runat="server" OnClick="Update" Text="Aceptar" CssClass="btns" />
+                                        </div>
+                                    </div>
                                 </dx:PanelContent>
                             </PanelCollection>
                         </dx:ASPxPanel>

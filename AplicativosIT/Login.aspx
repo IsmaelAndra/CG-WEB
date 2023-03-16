@@ -84,7 +84,7 @@
                                     </tr>
                                 <tr>
                                     <td style="padding:2px;" class="auto-style2">
-                                        <asp:TextBox  runat="server" type="text" id="Password" class="auto-style3" ></asp:TextBox>
+                                        <asp:TextBox  runat="server" type="password" id="Password" class="auto-style3" ></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>

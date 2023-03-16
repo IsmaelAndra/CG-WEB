@@ -20,7 +20,7 @@ namespace AplicativosIT
         {
             Response.AppendHeader("Cache-Control", "no-store");
         }
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConexionLogin"].ToString());
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Proyecto Final"].ToString());
         string Patron = "CGweb";
 
         protected void Login(object sender, EventArgs e)
@@ -38,9 +38,12 @@ namespace AplicativosIT
 
                 if (rd.Read())
                 {
-                    Session["id_rol"] = rd[6].ToString();
+                    Session["id_rol"] = rd[7].ToString();
                     Session["name_user"] = rd[1].ToString();
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("Admin.aspx");
+                }else
+                {
+                    Console.Write("Credenciales Incorrectas");
                 }
             } catch
             {

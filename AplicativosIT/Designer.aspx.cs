@@ -13,5 +13,23 @@ namespace AplicativosIT
         {
 
         }
+
+        protected void New_CardView(object sender, EventArgs e)
+        {
+            CardView.AddNewCard();
+        }
+        protected void simpleButton1_Click(object sender, EventArgs e)
+        {
+            gridView1.AddNewRow();
+        }
+        protected void Close(object sender, EventArgs e)
+        {
+            Response.Redirect("Designer.aspx");
+        }
+        protected void Update(object sender, EventArgs e)
+        {
+            CardView.UpdateEdit();
+            Response.Redirect("Designer.aspx");
+        }
     }
 }

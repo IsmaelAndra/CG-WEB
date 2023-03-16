@@ -15,7 +15,7 @@ namespace AplicativosIT
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void New_CardView(object sender, EventArgs e)
@@ -26,14 +26,14 @@ namespace AplicativosIT
         {
             gridView1.AddNewRow();
         }
-        [System.Web.Services.WebMethod]
         protected void Close(object sender, EventArgs e)
         {
-            CardView.CancelEdit();
+            Response.Redirect("Admin.aspx");
         }
         protected void Update(object sender, EventArgs e)
         {
             CardView.UpdateEdit();
+            Response.Redirect("Admin.aspx");
         }
     }
 }
