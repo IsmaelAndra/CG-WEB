@@ -10,6 +10,7 @@ using System.Collections;
 using DevExpress.Web.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using DevExpress.Web.ASPxRichEdit.Forms;
 
 namespace AplicativosIT
 {
@@ -38,12 +39,21 @@ namespace AplicativosIT
 
                 if (rd.Read())
                 {
-                    Session["id_rol"] = rd[7].ToString();
+                    Session["id_rol"] = rd[6].ToString();
                     Session["name_user"] = rd[1].ToString();
-                    Response.Redirect("Admin.aspx");
-                }else
+                    if (rd[6].ToString() == "1")
+                    {
+                        Response.Redirect("Admin.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Designer.aspx");
+                    }
+                }
+                else
                 {
-                    Console.Write("Credenciales Incorrectas");
+                    string script = string.Format("alerta();");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Script", script, true);
                 }
             } catch
             {
@@ -51,35 +61,5 @@ namespace AplicativosIT
             }
         }
 
-
-
-        private ArrayList CreateData()
-        {
-            ArrayList ds = new ArrayList();
-            ds.Add("ASPxGridView and Editors");
-            ds.Add("ASPxTreeList");
-            ds.Add("ASPxCloudControl");
-            ds.Add("ASPxHtmlEditor");
-            ds.Add("ASPxPivotGrid");
-            return ds;
-        }
-
-        const string UploadDirectory = "C:/uploads/";
-
-
-        protected void UploadControl_FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
-        {
-            string resultExtension = Path.GetExtension(e.UploadedFile.FileName);
-            string resultFileName = Path.ChangeExtension(Path.GetRandomFileName(), resultExtension);
-            string resultFileUrl = UploadDirectory + resultFileName;
-            string resultFilePath = MapPath(resultFileUrl);
-            e.UploadedFile.SaveAs(resultFilePath);
-
-        }
-
-        protected void DetailsView2_PageIndexChanging(object sender, DetailsViewPageEventArgs e)
-        {
-
-        }
     }
 }

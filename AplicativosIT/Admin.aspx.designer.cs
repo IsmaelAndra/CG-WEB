@@ -24,6 +24,15 @@ namespace AplicativosIT
         protected global::DevExpress.Web.ASPxButton Button1;
 
         /// <summary>
+        /// Control nombreUsuarioLog.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel nombreUsuarioLog;
+
+        /// <summary>
         /// Control ASPxButton1.
         /// </summary>
         /// <remarks>
@@ -150,15 +159,6 @@ namespace AplicativosIT
         protected global::DevExpress.Web.ASPxLabel version_db;
 
         /// <summary>
-        /// Control number_module.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxLabel number_module;
-
-        /// <summary>
         /// Control GridCard.
         /// </summary>
         /// <remarks>
@@ -204,13 +204,13 @@ namespace AplicativosIT
         protected global::DevExpress.Web.ASPxPanel ASPxPanel3;
 
         /// <summary>
-        /// Control gridView1.
+        /// Control GridCard1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxGridView gridView1;
+        protected global::DevExpress.Web.ASPxGridView GridCard1;
 
         /// <summary>
         /// Control PopupComboBox.
@@ -303,13 +303,22 @@ namespace AplicativosIT
         protected global::DevExpress.Web.ASPxPanel ASPxPanel5;
 
         /// <summary>
-        /// Control GridExample.
+        /// Control ASPxPopupControl4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GridExample;
+        protected global::DevExpress.Web.ASPxPopupControl ASPxPopupControl4;
+
+        /// <summary>
+        /// Control ASPxPanel7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPanel ASPxPanel7;
 
         /// <summary>
         /// Control ComboBox.
