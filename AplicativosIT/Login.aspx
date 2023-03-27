@@ -43,6 +43,13 @@
                 html: '<span style="font-size: 15px">Usuario o Contraseña Incorrectos!<span>'
             })
         }
+        function alertaActive() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: '<span style="font-size: 15px">El usuario no se encuentra habilitado<span>'
+            })
+        }
     </script>
     <div style="position: relative">
         <div style="position: absolute; z-index: 2; width: 100%; height: 100%">

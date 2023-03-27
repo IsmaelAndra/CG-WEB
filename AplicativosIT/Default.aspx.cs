@@ -15,8 +15,7 @@ namespace AplicativosIT
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session.Remove("id_rol");
-            Session.Remove("name_user");
+            
         }
 
     }

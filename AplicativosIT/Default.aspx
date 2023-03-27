@@ -134,35 +134,7 @@
                 </Images>
                 <Border BorderColor="Transparent"></Border>
             </dx:ASPxCardView>
-            <asp:SqlDataSource ID="CardView1" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [info_environmentt]" DeleteCommand="DELETE FROM [info_environmentt] WHERE [id] = @id" InsertCommand="INSERT INTO [info_environmentt] ([name_environment], [logo], [url], [ip_server], [ip_database], [management_db], [version_db], [number_module], [name_module], [name_database]) VALUES (@name_environment, @logo, @url, @ip_server, @ip_database, @management_db, @version_db, @number_module, @name_module, @name_database)" ProviderName="<%$ ConnectionStrings:Proyecto Final.ProviderName %>" UpdateCommand="UPDATE [info_environmentt] SET [name_environment] = @name_environment, [logo] = @logo, [url] = @url, [ip_server] = @ip_server, [ip_database] = @ip_database, [management_db] = @management_db, [version_db] = @version_db, [number_module] = @number_module, [name_module] = @name_module, [name_database] = @name_database WHERE [id] = @id">
-                <DeleteParameters>
-                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
-                </DeleteParameters>
-                <InsertParameters>
-                    <asp:Parameter Name="name_environment" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="logo" Type="Object"></asp:Parameter>
-                    <asp:Parameter Name="url" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="ip_server" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="ip_database" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="management_db" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="version_db" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="number_module" Type="Int32"></asp:Parameter>
-                    <asp:Parameter Name="name_module" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="name_database" Type="String"></asp:Parameter>
-                </InsertParameters>
-                <UpdateParameters>
-                    <asp:Parameter Name="name_environment" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="logo" Type="Object"></asp:Parameter>
-                    <asp:Parameter Name="url" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="ip_server" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="ip_database" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="management_db" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="version_db" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="number_module" Type="Int32"></asp:Parameter>
-                    <asp:Parameter Name="name_module" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="name_database" Type="String"></asp:Parameter>
-                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
-                </UpdateParameters>
+            <asp:SqlDataSource ID="CardView1" runat="server" ConnectionString="<%$ ConnectionStrings:Final %>" SelectCommand="SELECT * FROM [info_environmentt]">
             </asp:SqlDataSource>
         </div>
     </div>

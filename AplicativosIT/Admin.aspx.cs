@@ -23,6 +23,7 @@ namespace AplicativosIT
             else
             {
                 Response.Redirect("Default.aspx");
+                Response.End();
             }
         }
 
@@ -38,15 +39,21 @@ namespace AplicativosIT
         protected void Close(object sender, EventArgs e)
         {
             Response.Redirect("Admin.aspx");
+            Response.End();
+
         }
         protected void Update(object sender, EventArgs e)
         {
             CardView.UpdateEdit();
             Response.Redirect("Admin.aspx");
+
         }
         protected void Salir(object sender, EventArgs e)
         {
+            Session.Remove("id_rol");
+            Session.Remove("name_user");
             Response.Redirect("Default.aspx");
+            Response.End();
         }
     }
 }

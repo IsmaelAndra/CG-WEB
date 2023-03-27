@@ -189,6 +189,8 @@
     <dx:ASPxPopupControl ID="pcInfo" runat="server" Width="546px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
         PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcInfo"
         HeaderText='Información' HeaderImage-IconID="xaf_state_validation_information_svg_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+        <HeaderImage IconID="xaf_state_validation_information_svg_32x32"></HeaderImage>
+
         <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
         <ContentCollection>
             <dx:PopupControlContentControl runat="server">
@@ -207,6 +209,9 @@
                                             </LayoutItemNestedControlCollection>
                                         </dx:LayoutItem>
                                         <dx:LayoutItem Caption=" ">
+                                            <LayoutItemNestedControlCollection>
+                                                <dx:LayoutItemNestedControlContainer runat="server"></dx:LayoutItemNestedControlContainer>
+                                            </LayoutItemNestedControlCollection>
                                         </dx:LayoutItem>
                                         <dx:LayoutGroup Caption="Información del Entorno">
                                             <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
@@ -248,12 +253,21 @@
                                             </Items>
                                         </dx:LayoutGroup>
                                     </Items>
-                                    <Styles LayoutItem-Caption-Font-Bold="true" />
+                                    <Styles LayoutItem-Caption-Font-Bold="true">
+                                        <LayoutItem>
+                                            <Caption Font-Bold="True"></Caption>
+                                        </LayoutItem>
+                                    </Styles>
                                 </dx:ASPxFormLayout>
                             </div>
                             <div>
                                 <dx:ASPxGridView ID="GridCard" ClientInstanceName="GridCard" runat="server" DataSourceID="GridDB"
                                     Width="510px" AutoGenerateColumns="False" KeyFieldName="id" Theme="MetropolisBlue">
+
+                                    <SettingsPopup>
+                                        <FilterControl AutoUpdatePosition="False"></FilterControl>
+                                    </SettingsPopup>
+
                                     <EditFormLayoutProperties ColCount="2" ColumnCount="2">
                                         <Items>
                                             <dx:GridViewColumnLayoutItem ColumnName="name_module" ColSpan="1"></dx:GridViewColumnLayoutItem>
@@ -268,8 +282,8 @@
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="name_module" Caption="Nombre del Modulo" VisibleIndex="2"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataComboBoxColumn FieldName="fk_environment" Caption="Nombre del Entorno" VisibleIndex="5">
-                                                <PropertiesComboBox DataSourceID="CardView1" TextField="name_environment" ValueField="id">
-                                                </PropertiesComboBox>
+                                            <PropertiesComboBox DataSourceID="CardView1" TextField="name_environment" ValueField="id">
+                                            </PropertiesComboBox>
                                         </dx:GridViewDataComboBoxColumn>
                                         <dx:GridViewDataComboBoxColumn FieldName="name_database" Caption="Nombre del Gestor de Base de Datos" VisibleIndex="3">
                                             <PropertiesComboBox ShowImageInEditBox="True" DataSourceID="ComboBox" ImageUrlField="img" TextField="name_management" ValueField="name_management">
@@ -282,6 +296,9 @@
                                         <dx:ASPxSummaryItem FieldName="id" SummaryType="Count" ShowInColumn="name_database" DisplayFormat="<b>Cantidad de M&#243;dulos del Entorno:</b> {0}" />
                                     </TotalSummary>
                                 </dx:ASPxGridView>
+                            </div>
+                            <div>
+                                <button Class="btns"onclick="ShowGridView()">Agregar Modulo...</button>
                             </div>
                         </dx:PanelContent>
                     </PanelCollection>
@@ -400,25 +417,15 @@
                             <ClientSideEvents ButtonClick="function(s, e) { ShowGridViewComboBox(); }"></ClientSideEvents>
 
                             <ItemImage Height="24px" Width="23px" />
-                            <Buttons>
-                                <dx:EditButton ImagePosition="Right">
-                                    <Image IconID="spreadsheet_adddatasource_svg_dark_16x16"></Image>
-                                </dx:EditButton>
-                            </Buttons>
                         </PropertiesComboBox>
                     </dx:CardViewComboBoxColumn>
                     <dx:CardViewComboBoxColumn FieldName="version_db" VisibleIndex="5">
                         <PropertiesComboBox ShowImageInEditBox="True" DataSourceID="ComboBox0" ImageUrlField="img" TextField="name_version" ValueField="name_version" Width="90%">
                             <ClientSideEvents ButtonClick="function(s, e) { ShowGridViewComboBox1(); }"></ClientSideEvents>
                             <ItemImage Height="24px" Width="23px" />
-                            <Buttons>
-                                <dx:EditButton ImagePosition="Right">
-                                    <Image IconID="spreadsheet_adddatasource_svg_dark_16x16"></Image>
-                                </dx:EditButton>
-                            </Buttons>
                         </PropertiesComboBox>
                     </dx:CardViewComboBoxColumn>
-                    <dx:CardViewButtonEditColumn Caption="Modulos" Name="BOTTON" VisibleIndex="7">
+                    <%--<dx:CardViewButtonEditColumn Caption="Modulos" Name="BOTTON" VisibleIndex="7">
                         <PropertiesButtonEdit Width="100%" NullDisplayText="0">
                             <ClientSideEvents ButtonClick="function(s, e) {
 	                                ShowGridView();
@@ -441,7 +448,7 @@
                                 <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px" > </Border >
                             </Style>
                         </PropertiesButtonEdit>
-                    </dx:CardViewButtonEditColumn>
+                    </dx:CardViewButtonEditColumn>--%>
                     <dx:CardViewButtonEditColumn Caption="btnUpdate" Name="btnUpdate" VisibleIndex="8">
                         <PropertiesButtonEdit Width="100%">
                             <ClientSideEvents ButtonClick="function(s, e) {
@@ -523,7 +530,7 @@
                                 <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="2px"></Border>
                             </GroupBoxStyle>
                         </dx:CardViewLayoutGroup>
-                        <dx:CardViewLayoutGroup Caption="Informaci&#243;n de Modulos" ColSpan="1">
+                        <%--<dx:CardViewLayoutGroup Caption="Informaci&#243;n de Modulos" ColSpan="1">
                             <Items>
                                 <dx:CardViewColumnLayoutItem ColumnName="BOTTON" Caption="Modulos" ColSpan="1" Width="0%">
                                     <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
@@ -535,7 +542,7 @@
 
                                 <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="2px"></Border>
                             </GroupBoxStyle>
-                        </dx:CardViewLayoutGroup>
+                        </dx:CardViewLayoutGroup>--%>
                         <dx:CardViewColumnLayoutItem ColumnName="btnUpdate" Caption=" " ColSpan="1">
                             <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="1px"></Border>
                         </dx:CardViewColumnLayoutItem>
@@ -549,7 +556,7 @@
 
                 <CardLayoutProperties>
                     <Items>
-                        <dx:CardViewCommandLayoutItem ColSpan="1" HorizontalAlign="Right"  ShowEditButton="True">
+                        <dx:CardViewCommandLayoutItem ColSpan="1" HorizontalAlign="Right" ShowEditButton="True">
                         </dx:CardViewCommandLayoutItem>
                         <dx:CardViewColumnLayoutItem Caption=" " ColSpan="1" ColumnName="name_environment" HorizontalAlign="Center" CssClass="NombreCard">
                         </dx:CardViewColumnLayoutItem>
@@ -600,6 +607,8 @@
                 </StylesExport>
 
                 <Images>
+<PopupEditFormWindowClose IconID=" "></PopupEditFormWindowClose>
+
                     <LoadingPanel IconID="xaf_action_reload_svg_32x32"></LoadingPanel>
                 </Images>
 
@@ -615,6 +624,8 @@
             <dx:ASPxPopupControl ID="ASPxPopupControl3" runat="server" Width="670px" ContentStyle-Paddings-Padding="10px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
                 PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcModulos"
                 HeaderText='Modulos' HeaderImage-IconID="spreadsheet_allowuserstoeditranges_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
+                <HeaderImage IconID="spreadsheet_allowuserstoeditranges_32x32"></HeaderImage>
+
                 <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
                 <ContentCollection>
                     <dx:PopupControlContentControl runat="server">
@@ -689,210 +700,17 @@
                                                 </PropertiesComboBox>
                                             </dx:GridViewDataComboBoxColumn>
                                         </Columns>
+                                        <SettingsDataSecurity AllowDelete="False" />
                                         <SettingsPopup>
                                             <EditForm Width="730">
                                                 <SettingsAdaptivity Mode="OnWindowInnerWidth" SwitchAtWindowInnerWidth="768" />
                                             </EditForm>
+
+                                            <FilterControl AutoUpdatePosition="False"></FilterControl>
                                         </SettingsPopup>
                                         <SettingsPager Mode="ShowAllRecords" />
                                         <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" EnableRowHotTrack="true" />
                                         <SettingsText ConfirmDelete="¿Desea eliminar el modulo?" />
-                                    </dx:ASPxGridView>
-                                </dx:PanelContent>
-                            </PanelCollection>
-                        </dx:ASPxPanel>
-                    </dx:PopupControlContentControl>
-                </ContentCollection>
-                <ContentStyle>
-                    <Paddings PaddingBottom="5px" />
-                </ContentStyle>
-                <Border BorderColor="#0066FF" BorderStyle="Solid" BorderWidth="3px" />
-            </dx:ASPxPopupControl>
-
-            <dx:ASPxPopupControl ID="PopupComboBox" runat="server" Width="720px" ContentStyle-Paddings-Padding="10px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
-                PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcManagement"
-                HeaderText='Gestor de Base de Datos' HeaderImage-IconID="data_database_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
-                <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
-                <ContentCollection>
-                    <dx:PopupControlContentControl runat="server">
-                        <dx:ASPxPanel ID="ASPxPanel4" runat="server" DefaultButton="btOK" Width="458px">
-                            <PanelCollection>
-                                <dx:PanelContent runat="server">
-                                    <dx:ASPxGridView ID="GridViewComboBox" runat="server" DataSourceID="ComboBox"
-                                        AutoGenerateColumns="False" Width="638px" KeyFieldName="id" Theme="MetropolisBlue">
-                                        <SettingsCommandButton>
-                                            <EditButton Text=" ">
-                                                <Image IconID="actions_edit_16x16devav"></Image>
-                                            </EditButton>
-                                            <DeleteButton Text=" ">
-                                                <Image IconID="actions_cancel_16x16"></Image>
-                                            </DeleteButton>
-                                            <NewButton Text=" ">
-                                                <Image IconID="actions_add_16x16"></Image>
-                                            </NewButton>
-                                            <UpdateButton Text="Actualizar" RenderMode="Button">
-                                                <Styles>
-                                                    <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White">
-                                                        <HoverStyle BackColor="#0000CC" ForeColor="White" >
-                                                        </HoverStyle >
-                                                    </Style>
-                                                </Styles>
-                                            </UpdateButton>
-                                            <CancelButton Text="Cancelar" RenderMode="Button">
-                                                <Styles>
-                                                    <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White">
-                                                        <HoverStyle BackColor="#0000CC" ForeColor="White" >
-                                                        </HoverStyle >
-                                                    </Style>
-                                                </Styles>
-                                            </CancelButton>
-                                        </SettingsCommandButton>
-                                        <SettingsDataSecurity AllowDelete="False"></SettingsDataSecurity>
-
-                                        <SettingsEditing EditFormColumnCount="3" Mode="PopupEditForm" />
-                                        <EditFormLayoutProperties ColCount="3" ColumnCount="3">
-                                            <Items>
-                                                <dx:GridViewLayoutGroup Caption="Gestor de Base de Datos" ColSpan="3" ColumnSpan="3">
-                                                    <Items>
-                                                        <dx:GridViewColumnLayoutItem ColumnName="name_management" ColSpan="1"></dx:GridViewColumnLayoutItem>
-                                                        <dx:GridViewColumnLayoutItem ColumnName="img" ColSpan="1"></dx:GridViewColumnLayoutItem>
-                                                    </Items>
-
-                                                    <GroupBoxStyle>
-                                                        <Caption Font-Size="Small" ForeColor="Black"></Caption>
-
-                                                        <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="2px"></Border>
-                                                    </GroupBoxStyle>
-                                                </dx:GridViewLayoutGroup>
-                                                <dx:EditModeCommandLayoutItem ColSpan="3" ColumnSpan="3" HorizontalAlign="Center"></dx:EditModeCommandLayoutItem>
-                                            </Items>
-                                            <SettingsAdaptivity />
-                                        </EditFormLayoutProperties>
-                                        <Columns>
-                                            <dx:GridViewCommandColumn ShowEditButton="True" VisibleIndex="3" ShowNewButtonInHeader="True"></dx:GridViewCommandColumn>
-                                            <dx:GridViewDataTextColumn VisibleIndex="0" FieldName="id" ReadOnly="True">
-                                                <EditFormSettings Visible="False"></EditFormSettings>
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="Nombre del Gestor de Base de Datos" VisibleIndex="1" FieldName="name_management">
-                                                <PropertiesTextEdit Width="92%">
-                                                    <Style Font-Size="Small"></Style>
-                                                </PropertiesTextEdit>
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn FieldName="img" ShowInCustomizationForm="True" Caption="Imagen del Gestor de Base de Datos" VisibleIndex="2">
-                                                <PropertiesTextEdit>
-                                                    <ValidationSettings>
-                                                        <RegularExpression ErrorText="La URL debe de comenzar con https." ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;amp;=]*)?"></RegularExpression>
-                                                    </ValidationSettings>
-                                                </PropertiesTextEdit>
-                                            </dx:GridViewDataTextColumn>
-                                        </Columns>
-                                        <SettingsPopup>
-                                            <EditForm Width="730">
-                                                <SettingsAdaptivity Mode="OnWindowInnerWidth" SwitchAtWindowInnerWidth="768" />
-                                            </EditForm>
-                                        </SettingsPopup>
-                                        <SettingsPager Mode="ShowAllRecords" />
-                                        <SettingsText PopupEditFormCaption="Formulario de Edición" />
-                                    </dx:ASPxGridView>
-                                </dx:PanelContent>
-                            </PanelCollection>
-                        </dx:ASPxPanel>
-                    </dx:PopupControlContentControl>
-                </ContentCollection>
-                <ContentStyle>
-                    <Paddings PaddingBottom="5px" />
-                </ContentStyle>
-                <Border BorderColor="#0066FF" BorderStyle="Solid" BorderWidth="3px" />
-            </dx:ASPxPopupControl>
-
-            <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" Width="960px" ContentStyle-Paddings-Padding="10px" CloseAction="CloseButton" CloseOnEscape="True" Modal="True"
-                PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="pcVersion"
-                HeaderText='Versión de Base de Datos' HeaderImage-IconID="data_database_32x32" AllowDragging="True" PopupAnimationType="None" EnableViewState="False" AutoUpdatePosition="True" Theme="MetropolisBlue">
-                <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); }" />
-                <ContentCollection>
-                    <dx:PopupControlContentControl runat="server">
-                        <dx:ASPxPanel ID="ASPxPanel2" runat="server" DefaultButton="btOK" Width="960px">
-                            <PanelCollection>
-                                <dx:PanelContent runat="server">
-                                    <dx:ASPxGridView ID="ASPxGridView1" runat="server" DataSourceID="ComboBox0"
-                                        AutoGenerateColumns="False" Width="960px" KeyFieldName="id" Theme="MetropolisBlue">
-                                        <SettingsCommandButton>
-                                            <EditButton Text=" ">
-                                                <Image IconID="actions_edit_16x16devav"></Image>
-                                            </EditButton>
-                                            <DeleteButton Text=" ">
-                                                <Image IconID="actions_cancel_16x16"></Image>
-                                            </DeleteButton>
-                                            <NewButton Text=" ">
-                                                <Image IconID="actions_add_16x16"></Image>
-                                            </NewButton>
-                                            <UpdateButton Text="Actualizar" RenderMode="Button">
-                                                <Styles>
-                                                    <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White">
-                                                        <HoverStyle BackColor="#0000CC" ForeColor="White" >
-                                                        </HoverStyle >
-                                                    </Style>
-                                                </Styles>
-                                            </UpdateButton>
-                                            <CancelButton Text="Cancelar" RenderMode="Button">
-                                                <Styles>
-                                                    <Style CssClass="btn" BackColor="#0066CC" Cursor="pointer" ForeColor="White">
-                                                        <HoverStyle BackColor="#0000CC" ForeColor="White" >
-                                                        </HoverStyle >
-                                                    </Style>
-                                                </Styles>
-                                            </CancelButton>
-                                        </SettingsCommandButton>
-                                        <SettingsEditing EditFormColumnCount="3" Mode="PopupEditForm" />
-                                        <EditFormLayoutProperties ColCount="3" ColumnCount="3">
-                                            <Items>
-                                                <dx:GridViewLayoutGroup Caption="Versi&#243;n del Gestor de Base de Datos" ColSpan="3" ColumnSpan="3">
-                                                    <Items>
-                                                        <dx:GridViewColumnLayoutItem ColumnName="Nombre de la Versi&#243;n del Gestor de Base de Datos" ColSpan="1"></dx:GridViewColumnLayoutItem>
-                                                        <dx:GridViewColumnLayoutItem ColumnName="Imagen de la Versi&#243;n del Gestor de Base de Datos" ColSpan="1"></dx:GridViewColumnLayoutItem>
-                                                        <dx:GridViewColumnLayoutItem ColumnName="fk_management_db" ColSpan="1"></dx:GridViewColumnLayoutItem>
-                                                    </Items>
-                                                    <GroupBoxStyle>
-                                                        <Caption Font-Size="Small" ForeColor="Black"></Caption>
-
-                                                        <Border BorderColor="Transparent" BorderStyle="Solid" BorderWidth="2px"></Border>
-                                                    </GroupBoxStyle>
-                                                </dx:GridViewLayoutGroup>
-                                                <dx:EditModeCommandLayoutItem ColSpan="3" ColumnSpan="3" HorizontalAlign="Right"></dx:EditModeCommandLayoutItem>
-                                            </Items>
-                                            <SettingsAdaptivity />
-                                        </EditFormLayoutProperties>
-                                        <Columns>
-                                            <dx:GridViewCommandColumn VisibleIndex="5" ShowEditButton="True" ShowDeleteButton="True" ShowNewButtonInHeader="True"></dx:GridViewCommandColumn>
-                                            <dx:GridViewDataTextColumn VisibleIndex="0" FieldName="id" ReadOnly="True">
-                                                <EditFormSettings Visible="False"></EditFormSettings>
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn FieldName="name_version" ShowInCustomizationForm="True" Name="Nombre de la Versi&#243;n del Gestor de Base de Datos" Caption="Nombre de la Versi&#243;n del Gestor de Base de Datos" VisibleIndex="1">
-                                                <PropertiesTextEdit Width="91%">
-                                                    <Style Font-Size="Small"></Style>
-                                                </PropertiesTextEdit>
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn FieldName="img" Name="Imagen de la Versi&#243;n del Gestor de Base de Datos" Caption="Imagen de la Versi&#243;n del Gestor de Base de Datos" VisibleIndex="2">
-                                                <PropertiesTextEdit>
-                                                    <ValidationSettings>
-                                                        <RegularExpression ErrorText="La URL debe de comenzar con https." ValidationExpression="http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;amp;=]*)?"></RegularExpression>
-                                                    </ValidationSettings>
-                                                </PropertiesTextEdit>
-                                            </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataComboBoxColumn FieldName="fk_management_db" Caption="Gestor de Base de Datos" VisibleIndex="3">
-                                                <PropertiesComboBox ShowImageInEditBox="True" DataSourceID="ComboBox" ImageUrlField="img" TextField="name_management" Width="91%" ValueField="id">
-                                                    <ItemImage Height="24px" Width="23px" />
-                                                </PropertiesComboBox>
-                                            </dx:GridViewDataComboBoxColumn>
-                                        </Columns>
-                                        <SettingsPopup>
-                                            <EditForm Width="730">
-                                                <SettingsAdaptivity Mode="OnWindowInnerWidth" SwitchAtWindowInnerWidth="768" />
-                                            </EditForm>
-                                        </SettingsPopup>
-                                        <SettingsPager Mode="ShowAllRecords" />
-                                        <SettingsBehavior ConfirmDelete="true" EnableCustomizationWindow="true" EnableRowHotTrack="true" />
-                                        <SettingsText PopupEditFormCaption="Formulario de Edición" ConfirmDelete="¿Desea eliminar la versión del gestor de base de datos?" />
                                     </dx:ASPxGridView>
                                 </dx:PanelContent>
                             </PanelCollection>
@@ -983,7 +801,7 @@
                 <Border BorderColor="#0066FF" BorderStyle="Solid" BorderWidth="3px" />
             </dx:ASPxPopupControl>
 
-            <asp:SqlDataSource ID="ComboBox" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [management_db]" DeleteCommand="DELETE FROM [management_db] WHERE [id] = @id" InsertCommand="INSERT INTO [management_db] ([name_management], [img]) VALUES (@name_management, @img)" UpdateCommand="UPDATE [management_db] SET [name_management] = @name_management, [img] = @img WHERE [id] = @id">
+            <asp:SqlDataSource ID="ComboBox" runat="server" ConnectionString="<%$ ConnectionStrings:Final %>" SelectCommand="SELECT * FROM [management_db]" DeleteCommand="DELETE FROM [management_db] WHERE [id] = @id" InsertCommand="INSERT INTO [management_db] ([name_management], [img]) VALUES (@name_management, @img)" UpdateCommand="UPDATE [management_db] SET [name_management] = @name_management, [img] = @img WHERE [id] = @id">
                 <DeleteParameters>
                     <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
                 </DeleteParameters>
@@ -997,12 +815,11 @@
                     <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="ComboBox0" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [version_db]" DeleteCommand="DELETE FROM [version_db] WHERE [id] = @id" InsertCommand="INSERT INTO [version_db] ([id], [name_version], [img], [fk_management_db]) VALUES (@id, @name_version, @img, @fk_management_db)" UpdateCommand="UPDATE [version_db] SET [name_version] = @name_version, [img] = @img, [fk_management_db] = @fk_management_db WHERE [id] = @id">
+            <asp:SqlDataSource ID="ComboBox0" runat="server" ConnectionString="<%$ ConnectionStrings:Final %>" SelectCommand="SELECT * FROM [version_db]" DeleteCommand="DELETE FROM [version_db] WHERE [id] = @id" InsertCommand="INSERT INTO [version_db] ([name_version], [img], [fk_management_db]) VALUES (@name_version, @img, @fk_management_db)" UpdateCommand="UPDATE [version_db] SET [name_version] = @name_version, [img] = @img, [fk_management_db] = @fk_management_db WHERE [id] = @id">
                 <DeleteParameters>
                     <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
                 </DeleteParameters>
                 <InsertParameters>
-                    <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
                     <asp:Parameter Name="name_version" Type="String"></asp:Parameter>
                     <asp:Parameter Name="img" Type="String"></asp:Parameter>
                     <asp:Parameter Name="fk_management_db" Type="Int32"></asp:Parameter>
@@ -1014,14 +831,14 @@
                     <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="ComboBox1" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [roles]"></asp:SqlDataSource>
-            <asp:SqlDataSource ID="CardView1" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [info_environmentt]" DeleteCommand="DELETE FROM [info_environmentt] WHERE [id] = @id" InsertCommand="INSERT INTO [info_environmentt] ([name_environment], [logo], [url], [ip_server], [ip_database], [management_db], [version_db]) VALUES (@name_environment, @logo, @url, @ip_server, @ip_database, @management_db, @version_db)" UpdateCommand="UPDATE [info_environmentt] SET [name_environment] = @name_environment, [logo] = @logo, [url] = @url, [ip_server] = @ip_server, [ip_database] = @ip_database, [management_db] = @management_db, [version_db] = @version_db WHERE [id] = @id">
+            <asp:SqlDataSource ID="ComboBox1" runat="server" ConnectionString="<%$ ConnectionStrings:Final %>" SelectCommand="SELECT * FROM [roles]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="CardView1" runat="server" ConnectionString="<%$ ConnectionStrings:Final %>" SelectCommand="SELECT * FROM [info_environmentt]" DeleteCommand="DELETE FROM [info_environmentt] WHERE [id] = @id" InsertCommand="INSERT INTO [info_environmentt] ([name_environment], [logo], [url], [ip_server], [ip_database], [management_db], [version_db]) VALUES (@name_environment, @logo, @url, @ip_server, @ip_database, @management_db, @version_db)" UpdateCommand="UPDATE [info_environmentt] SET [name_environment] = @name_environment, [logo] = @logo, [url] = @url, [ip_server] = @ip_server, [ip_database] = @ip_database, [management_db] = @management_db, [version_db] = @version_db WHERE [id] = @id">
                 <DeleteParameters>
                     <asp:Parameter Name="id" Type="Int32" />
                 </DeleteParameters>
                 <InsertParameters>
                     <asp:Parameter Name="name_environment" Type="String" />
-                    <asp:Parameter Name="logo" DbType="Binary" />
+                    <asp:Parameter Name="logo" Type="Object" />
                     <asp:Parameter Name="url" Type="String" />
                     <asp:Parameter Name="ip_server" Type="String" />
                     <asp:Parameter Name="ip_database" Type="String" />
@@ -1030,7 +847,7 @@
                 </InsertParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="name_environment" Type="String" />
-                    <asp:Parameter Name="logo" DbType="Binary" />
+                    <asp:Parameter Name="logo" Type="Object" />
                     <asp:Parameter Name="url" Type="String" />
                     <asp:Parameter Name="ip_server" Type="String" />
                     <asp:Parameter Name="ip_database" Type="String" />
@@ -1039,7 +856,7 @@
                     <asp:Parameter Name="id" Type="Int32" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="GridDB" runat="server" ConnectionString="<%$ ConnectionStrings:Proyecto Final %>" SelectCommand="SELECT * FROM [module]" DeleteCommand="DELETE FROM [module] WHERE [id] = @id" InsertCommand="INSERT INTO [module] ([name_module], [name_database], [fk_environment]) VALUES (@name_module, @name_database, @fk_environment)" UpdateCommand="UPDATE [module] SET [name_module] = @name_module, [name_database] = @name_database, [fk_environment] = @fk_environment WHERE [id] = @id">
+            <asp:SqlDataSource ID="GridDB" runat="server" ConnectionString="<%$ ConnectionStrings:Final %>" SelectCommand="SELECT * FROM [module]" DeleteCommand="DELETE FROM [module] WHERE [id] = @id" InsertCommand="INSERT INTO [module] ([name_module], [name_database], [fk_environment]) VALUES (@name_module, @name_database, @fk_environment)" UpdateCommand="UPDATE [module] SET [name_module] = @name_module, [name_database] = @name_database, [fk_environment] = @fk_environment WHERE [id] = @id">
                 <DeleteParameters>
                     <asp:Parameter Name="id" Type="Int32"></asp:Parameter>
                 </DeleteParameters>

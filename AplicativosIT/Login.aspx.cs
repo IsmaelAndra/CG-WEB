@@ -21,13 +21,11 @@ namespace AplicativosIT
         {
             Response.AppendHeader("Cache-Control", "no-store");
         }
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Proyecto Final"].ToString());
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["Login"].ToString());
         string Patron = "CGweb";
 
         protected void Login(object sender, EventArgs e)
         {
-            try
-            {
                 SqlCommand cmd = new SqlCommand("sp_login", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Usuario", System.Data.SqlDbType.VarChar).Value = UserName.Text;
@@ -41,24 +39,31 @@ namespace AplicativosIT
                 {
                     Session["id_rol"] = rd[6].ToString();
                     Session["name_user"] = rd[1].ToString();
-                    if (rd[6].ToString() == "1")
+               
+                var state = Session["state"] = rd[5].ToString();
+                if (rd[6].ToString() == "1" && rd[5].ToString() == "True")
                     {
                         Response.Redirect("Admin.aspx");
+                        Response.End();
+                    }
+                    else if (rd[6].ToString() == "2" && rd[5].ToString() == "True")
+                    {
+                        Response.Redirect("Designer.aspx");
+                        Response.End();
                     }
                     else
                     {
-                        Response.Redirect("Designer.aspx");
-                    }
+                    string script = string.Format("alertaActive();");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Script", script, true);
+                }
                 }
                 else
                 {
                     string script = string.Format("alerta();");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Script", script, true);
                 }
-            } catch
-            {
-
-            }
+            cmd.Connection.Close();
+            
         }
 
     }
